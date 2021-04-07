@@ -29,7 +29,8 @@ jobs:
       run: |
             dotnet tool install --global dotnet-ef
             dotnet tool restore
-            dotnet ef database update -c ApplicationDbContext -s ./src/WebApp.sln --msbuildprojectextensionspath obj/local
+            dotnet ef database update -p ./src/WebApp/WebApp.csproj
+#            #dotnet ef database update -c ApplicationDbContext -s ./src/WebApp.sln --msbuildprojectextensionspath obj/local
       env:
         ASPNETCORE_ENVIRONMENT: Development
 ## https://stackoverflow.com/a/66324027/14036841
