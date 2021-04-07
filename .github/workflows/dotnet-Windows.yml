@@ -25,5 +25,12 @@ jobs:
 #      run: Remove-Item -path ./src/WebApp/Data/Migrations -WhatIf
 #    - name: Create new migrations
 #      run: dotnet ef migrations add "CreatedNewTables" -s ./src/WebApp.sln -c ApplicationDbContext
+    - name: Update database
+      run: |
+            dotnet tool install --global dotnet-ef
+            dotnet tool restore
+            dotnet ef database update -p ./src/WebApp/WebApp.csproj
+      env:
+        ASPNETCORE_ENVIRONMENT: Development
     - name: Test
       run: dotnet test --no-build --verbosity normal ./src/WebApp.sln

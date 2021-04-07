@@ -25,14 +25,14 @@ jobs:
 #      run: dotnet tool install --global dotnet-ef
 #    - name: Create new migrations
 # https://stackoverflow.com/questions/59234655/apply-ef-migrations-in-github-workflow/59344051#59344051
-    - name: Update database
-      run: |
-            dotnet tool install --global dotnet-ef
-            dotnet tool restore
-            dotnet ef database update -p ./src/WebApp/WebApp.csproj
-#            #dotnet ef database update -c ApplicationDbContext -s ./src/WebApp.sln --msbuildprojectextensionspath obj/local
-      env:
-        ASPNETCORE_ENVIRONMENT: Development
+#     - name: Update database
+#       run: |
+#             dotnet tool install --global dotnet-ef
+#             dotnet tool restore
+#             dotnet ef database update -p ./src/WebApp/WebApp.csproj
+# #            #dotnet ef database update -c ApplicationDbContext -s ./src/WebApp.sln --msbuildprojectextensionspath obj/local
+#       env:
+#         ASPNETCORE_ENVIRONMENT: Development
 ## https://stackoverflow.com/a/66324027/14036841
 ## dotnet ef migrations add NewMigration --msbuildprojectextensionspath obj/local
 #      run: dotnet ef migrations add "CreatedNewTables" -s ./src/WebApp.sln -c ApplicationDbContext --msbuildprojectextensionspath obj/local
