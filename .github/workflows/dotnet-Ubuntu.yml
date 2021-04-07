@@ -18,9 +18,9 @@ jobs:
       with:
         dotnet-version: 5.0.x
     - name: Restore dependencies
-      run: dotnet restore ./src/WebApp/WebApp.sln
+      run: dotnet restore ./src/WebApp.sln
     - name: Build
-      run: dotnet build --no-restore ./src/WebApp/WebApp.sln
+      run: dotnet build --no-restore ./src/WebApp.sln
 #    - name: Install dotnet ef
 #      run: dotnet tool install --global dotnet-ef
 #    - name: Create new migrations
@@ -29,11 +29,11 @@ jobs:
       run: |
             dotnet tool install --global dotnet-ef
             dotnet tool restore
-            dotnet ef database update --c ApplicationDbContext -s ./src/WebApp/WebApp.sln
+            dotnet ef database update --c ApplicationDbContext -s ./src/WebApp.sln
       env:
         ASPNETCORE_ENVIRONMENT: Development
 ## https://stackoverflow.com/a/66324027/14036841
 ## dotnet ef migrations add NewMigration --msbuildprojectextensionspath obj/local
-#      run: dotnet ef migrations add "CreatedNewTables" -s ./src/WebApp/WebApp.sln -c ApplicationDbContext --msbuildprojectextensionspath obj/local
+#      run: dotnet ef migrations add "CreatedNewTables" -s ./src/WebApp.sln -c ApplicationDbContext --msbuildprojectextensionspath obj/local
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./src/WebApp/WebApp.sln
+      run: dotnet test --no-build --verbosity normal ./src/WebApp.sln

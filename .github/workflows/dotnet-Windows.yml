@@ -18,12 +18,12 @@ jobs:
       with:
         dotnet-version: 5.0.201
     - name: Restore dependencies
-      run: dotnet restore ./src/WebApp/WebApp.sln
+      run: dotnet restore ./src/WebApp.sln
     - name: Build
-      run: dotnet build --no-restore ./src/WebApp/WebApp.sln
+      run: dotnet build --no-restore ./src/WebApp.sln
 #    - name: Remove migrations 
-#      run: Remove-Item -path ./src/WebApp/WebApp/Data/Migrations -WhatIf
+#      run: Remove-Item -path ./src/WebApp/Data/Migrations -WhatIf
 #    - name: Create new migrations
-#      run: dotnet ef migrations add "CreatedNewTables" -s ./src/WebApp/WebApp.sln -c ApplicationDbContext
+#      run: dotnet ef migrations add "CreatedNewTables" -s ./src/WebApp.sln -c ApplicationDbContext
     - name: Test
-      run: dotnet test --no-build --verbosity normal ./src/WebApp/WebApp.sln
+      run: dotnet test --no-build --verbosity normal ./src/WebApp.sln
