@@ -1,4 +1,4 @@
-# dotnet-build-GitHub-Action-yaml
+# dotnet build GitHub-Action yaml (yml)
  
 2 yaml files for building a dotnet application.  
 In Windows, it will also add new migrations and make a dotnet ef database update. 
