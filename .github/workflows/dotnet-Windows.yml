@@ -13,24 +13,29 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Setup .NET v5.0.201
+    - name: .NET - Setup SDK v5.0.x
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.201
-    - name: Restore dependencies
+        dotnet-version: 5.0.x
+#    A workaround to resolve NuGet-issue: https://github.com/dotnet/installer/issues/10171
+    - name: NuGet - Add nuget.org (WORKAROUND for .NET v5.0.202)
+      run: dotnet nuget add source https://api.nuget.org/v3/index.json --name nuget.org
+    - name: .NET - Restore dependencies
       run: dotnet restore ./src/WebApp.sln
-    - name: Build
+    - name: .NET - Build
       run: dotnet build --no-restore ./src/WebApp.sln
-#    - name: Remove migrations 
+#    - name: ps - Remove migrations 
 #      run: Remove-Item -path ./src/WebApp/Data/Migrations -WhatIf
-#    - name: Create new migrations
-#      run: dotnet ef migrations add "CreatedNewTables" -s ./src/WebApp.sln -c ApplicationDbContext
-    - name: Update database
+    - name: EF - Create new migrations
       run: |
             dotnet tool install --global dotnet-ef
             dotnet tool restore
-            dotnet ef database update -p ./src/WebApp/WebApp.csproj
+            dotnet ef migrations add "CreatedNewTables" -p ./src/WebApp/WebApp.csproj -c ApplicationDbContext
       env:
         ASPNETCORE_ENVIRONMENT: Development
-    - name: Test
+    - name: EF - Update database
+      run: dotnet ef database update -p ./src/WebApp/WebApp.csproj
+      env:
+        ASPNETCORE_ENVIRONMENT: Development
+    - name: .NET - Test
       run: dotnet test --no-build --verbosity normal ./src/WebApp.sln
